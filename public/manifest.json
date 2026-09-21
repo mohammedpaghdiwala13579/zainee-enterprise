@@ -1,0 +1,36 @@
+{
+  "name": "Zainee Enterprise Terminal",
+  "short_name": "Zainee Enterprise",
+  "description": "Hardware, Tools, Machineries, Spare Parts, Importers & General Order Supplier Terminal",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e40af",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "https://i.ibb.co.com/V8VJdXK/123.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co.com/V8VJdXK/123.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.ibb.co.com/V8VJdXK/123.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://i.ibb.co.com/V8VJdXK/123.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

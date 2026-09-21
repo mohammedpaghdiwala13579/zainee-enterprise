@@ -1,0 +1,1200 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Hide webkit/spinner buttons for number fields */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Ensure contenteditable cells and table cells have tight, uniform line spacing without blank paragraph gaps */
+.main-table td,
+.main-table th,
+.sheet td,
+.sheet th,
+[contenteditable],
+[data-sync-id] {
+  line-height: 1.15;
+}
+
+.main-table td p,
+.main-table td div,
+.sheet td p,
+.sheet td div,
+[contenteditable] p,
+[contenteditable] div,
+[data-sync-id] p,
+[data-sync-id] div {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.15 !important;
+}
+
+/* Physical spacers ensuring clear separation between header, meta table, and items table */
+.meta-top-spacer {
+  display: block !important;
+  width: 100% !important;
+  height: 12px !important;
+  min-height: 12px !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  clear: both !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.meta-bottom-spacer {
+  display: block !important;
+  width: 100% !important;
+  height: 12px !important;
+  min-height: 12px !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  clear: both !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.items-table-wrapper {
+  padding-top: 0;
+  width: 100%;
+}
+
+/* Information Table container */
+.meta-info-container {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 1.5px solid #475569;
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 16px 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
+
+.meta-grid-inner {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100%;
+}
+
+.meta-left-col {
+  border-right: none !important;
+  padding-right: 14px;
+}
+
+.meta-right-col {
+  padding-left: 14px;
+}
+
+.meta-info-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+/* Print Styling Configuration */
+@media print {
+  /* Set standard A4 page size with consistent page margins so every page has identical bottom spacing */
+  @page {
+    size: A4 portrait;
+    margin-top: 6mm;
+    margin-bottom: 8mm;
+    margin-left: 6mm;
+    margin-right: 6mm;
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 7pt;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: #334155;
+    }
+  }
+
+  body {
+    counter-reset: page;
+  }
+
+  html, body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 8.5pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Ensure parent containers don't have backgrounds, paddings, margins, flex, grid, transforms, transitions, borders or shadows in print */
+  #root,
+  .min-h-screen,
+  main,
+  .animate-in,
+  .erp-app-shell,
+  #document-editor-wrapper,
+  .quotation-container,
+  div[id="document-editor-wrapper"],
+  div[class*="erp-app-shell"] {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-width: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    position: static !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .print-page-top-spacer {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* When printing the quotation/challan, hide non-printing elements */
+  .no-print,
+  .excel-editor-container,
+  .top-toolbar,
+  .saved-docs-panel,
+  header.no-print,
+  footer {
+    display: none !important;
+  }
+
+  .quotation-container {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .sheet {
+    box-shadow: none !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important; /* Uniform margins are handled at the @page level for all pages */
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    position: static !important; /* Crucial for repeating table headers in Chrome */
+    overflow: visible !important;
+    page-break-after: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Centered repeating watermark on every page in print */
+  .watermark-container {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 70% !important;
+    height: auto !important;
+    max-width: 500px !important;
+    z-index: -1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+  }
+
+  .watermark-container img {
+    width: 100% !important;
+    max-width: 500px !important;
+    opacity: 0.045 !important;
+  }
+
+  /* Top Page Format Header - format written only on the top of the page */
+  .page-format-header {
+    text-align: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+    clear: both !important;
+    width: 100% !important;
+  }
+
+  .doc-title {
+    font-size: 13pt !important;
+    letter-spacing: 7px !important;
+    text-align: center !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    display: inline-block !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Print optimizations for Zainee Enterprise letterhead and metadata boxes */
+  .business-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border-bottom: none !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 16px !important;
+    clear: both !important;
+    overflow: hidden !important;
+  }
+
+  .business-header > div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    text-align: left !important;
+    overflow: hidden !important;
+  }
+
+  .business-header h1 {
+    font-size: 21pt !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.02em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .business-header .contact-details {
+    display: block !important;
+    flex: 0 0 auto !important;
+    text-align: right !important;
+    white-space: normal !important;
+    max-width: 42% !important;
+    padding-left: 6px !important;
+    font-size: 7.2pt !important;
+    line-height: 1.2 !important;
+  }
+
+  .logo-container {
+    height: 82px !important;
+    width: 82px !important;
+    min-width: 82px !important;
+    max-width: 82px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 12px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .logo-container img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+  }
+
+  .logo-container + div {
+    display: block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .company-tagline-1 {
+    font-size: 8.2pt !important;
+    letter-spacing: 0.01em !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+  }
+
+  .company-tagline-2 {
+    font-size: 7.2pt !important;
+    letter-spacing: 0.01em !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Physical spacers ensuring clear separation between header, meta table, and items table */
+  .meta-top-spacer {
+    display: block !important;
+    width: 100% !important;
+    height: 10px !important;
+    min-height: 10px !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
+    clear: both !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .meta-bottom-spacer {
+    display: block !important;
+    width: 100% !important;
+    height: 10px !important;
+    min-height: 10px !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
+    clear: both !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .items-table-wrapper {
+    padding-top: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Information Table container with clear border and balanced spacing */
+  .meta-info-container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 1px solid #475569 !important;
+    border-radius: 4px !important;
+    background-color: #ffffff !important;
+    padding: 12px 16px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+    clear: both !important;
+  }
+
+  .meta-grid-inner {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+
+  .meta-left-col {
+    border-right: none !important;
+    padding-right: 16px !important;
+  }
+
+  .meta-right-col {
+    padding-left: 16px !important;
+  }
+
+  .meta-info-container * {
+    color: #000000 !important;
+  }
+
+  .meta-info-row.print\:hidden,
+  .meta-info-row.meta-row-empty,
+  .meta-col-empty,
+  .meta-box-empty {
+    display: none !important;
+  }
+
+  .meta-info-row:not(.meta-row-empty):not(.print\:hidden) {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .meta-info-container [id^="print-"] {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    border-bottom: none !important;
+    min-height: 22px !important;
+  }
+
+  .meta-info-container label {
+    font-size: 6.5pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .meta-info-container div,
+  .meta-info-container span,
+  .meta-info-container p {
+    font-size: 6.8pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .meta-info-container svg {
+    color: #000000 !important;
+    stroke: #000000 !important;
+  }
+
+  .meta-grid {
+    display: grid !important;
+    grid-template-columns: 1.35fr 1fr !important;
+    gap: 20px !important;
+    width: 100% !important;
+    margin-top: 12px !important;
+    margin-bottom: 14px !important;
+    clear: both !important;
+  }
+
+  .meta-grid .meta-box {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+  }
+
+  .meta-grid .meta-print-field {
+    display: flex !important;
+    align-items: flex-start !important;
+    height: auto !important;
+    min-height: 24px !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    gap: 6px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+    font-size: 6.8pt !important;
+    line-height: 1.25 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .meta-grid .meta-print-field > span:first-child {
+    font-size: 6.5pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    line-height: 1.25 !important;
+  }
+
+  .meta-grid .meta-print-field > span:last-child {
+    min-width: 0 !important;
+    font-size: 6.8pt !important;
+    color: #000000 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: pre-wrap !important;
+    flex-grow: 1 !important;
+    line-height: 1.25 !important;
+  }
+
+  .meta-grid .meta-box .meta-print-field:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .meta-box .meta-inner-field.col-span-2 {
+    grid-column: span 2 / span 2 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* Force outer layout table to behave as display: table and repeat thead on every page */
+  table.print-outer-layout-table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    border: none !important;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  table.print-outer-layout-table > thead {
+    display: table-header-group !important;
+    position: static !important;
+  }
+
+  table.print-outer-layout-table > tbody {
+    display: table-row-group !important;
+    position: static !important;
+  }
+
+  table.print-outer-layout-table > tfoot {
+    display: table-footer-group !important;
+    position: static !important;
+  }
+
+  table.print-outer-layout-table > thead > tr,
+  table.print-outer-layout-table > tfoot > tr {
+    position: static !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  table.print-outer-layout-table > thead > tr > td {
+    position: static !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  table.print-outer-layout-table > tfoot > tr > td {
+    position: static !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Table styling for perfect alignments, compact sentence fit, and crisp borders */
+  .main-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1px solid #475569 !important;
+    table-layout: fixed !important;
+  }
+
+  .main-table th {
+    border: 1px solid #475569 !important;
+    padding: 3.5px 4px !important;
+    font-size: 8.5pt !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    background-color: transparent !important;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+  }
+
+  .main-table td {
+    border: 1px solid #475569 !important;
+    padding: 1px 3px !important; /* tight vertical fit so 35+ items comfortably fit on page 1 */
+    font-size: 8pt !important;
+    line-height: 1.15 !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: pre-wrap !important;
+    vertical-align: middle !important;
+  }
+
+  .main-table td *,
+  .main-table td p,
+  .main-table td div {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.15 !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: pre-wrap !important;
+    overflow: visible !important;
+  }
+
+  .main-table tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Ensure scroll wrappers do not have negative margins or overflow when printing */
+  .sheet .overflow-x-auto {
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Ensure stamp and signature section don't break across pages */
+  .closing-wrap {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .closing-row {
+    border: 1px solid #475569 !important;
+    border-collapse: collapse !important;
+  }
+
+  .closing-row td {
+    border-color: #475569 !important;
+  }
+
+  .sig-line {
+    border-top-width: 1.5px !important;
+    border-top-color: #475569 !important;
+    font-size: 9.5pt !important;
+    padding-top: 4px !important;
+  }
+
+  .sig-section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-top: 10px !important;
+    padding-top: 8px !important;
+  }
+
+  .sig-box {
+    height: 80px !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+  }
+
+  .doc-footer-notice {
+    margin-top: 6px !important;
+    padding-top: 2px !important;
+    font-size: 8pt !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Repeating Signature Footer on EVERY printed page */
+  .print-repeating-signature-footer {
+    display: block !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 9999 !important;
+    background: transparent !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-fixed-sig-inner {
+    width: 100% !important;
+    background: transparent !important;
+    padding-bottom: 2px !important;
+    margin: 0 !important;
+  }
+
+  .print-fixed-sig-inner .sig-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .print-footer-spacer {
+    display: block !important;
+    height: 115px !important;
+    min-height: 115px !important;
+    width: 100% !important;
+    visibility: hidden !important;
+  }
+
+  .screen-sig-wrapper {
+    display: none !important;
+  }
+
+  /* Remove any cell outlines, focus borders, and selection highlights on print */
+  .sheet,
+  .sheet *,
+  .main-table,
+  .main-table *,
+  .main-table th,
+  .main-table td,
+  textarea,
+  input,
+  [class*="outline-"],
+  [class*="ring-"] {
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Force background colors and image watermarks to show */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Highlighting (Background Colors) must strictly print with exact colors */
+  mark,
+  span[style*="background"],
+  span[style*="background-color"],
+  [style*="background-color"],
+  [style*="background"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    -webkit-box-decoration-break: clone !important;
+    box-decoration-break: clone !important;
+    display: inline !important;
+  }
+
+  /* Text Colors must strictly print with exact colors */
+  font[color],
+  span[style*="color"],
+  [style*="color"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Bold elements in print */
+  b,
+  strong,
+  span[style*="font-weight: bold"],
+  span[style*="font-weight:bold"],
+  span[style*="font-weight: 700"],
+  span[style*="font-weight:700"],
+  [style*="font-weight: bold"],
+  [style*="font-weight:bold"],
+  [style*="font-weight: 700"],
+  [style*="font-weight:700"] {
+    font-weight: 700 !important;
+  }
+
+  /* Italic elements in print */
+  i,
+  em,
+  span[style*="font-style: italic"],
+  span[style*="font-style:italic"],
+  [style*="font-style: italic"],
+  [style*="font-style:italic"] {
+    font-style: italic !important;
+  }
+
+  /* Underline elements in print */
+  u,
+  span[style*="text-decoration: underline"],
+  span[style*="text-decoration:underline"],
+  [style*="text-decoration: underline"],
+  [style*="text-decoration:underline"] {
+    text-decoration: underline !important;
+    -webkit-text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+  }
+
+  span[style*="text-decoration-style: double"],
+  [style*="text-decoration-style: double"],
+  [style*="text-decoration-style:double"] {
+    text-decoration: underline !important;
+    text-decoration-style: double !important;
+    -webkit-text-decoration-style: double !important;
+  }
+}
+
+/* PDF Generation temporary styling overrides */
+.is-generating-pdf .no-print,
+.is-generating-pdf .excel-editor-container,
+.is-generating-pdf .top-toolbar,
+.is-generating-pdf .saved-docs-panel,
+.is-generating-pdf footer,
+.is-generating-pdf header {
+  display: none !important;
+}
+
+.is-generating-pdf .sheet,
+.is-generating-pdf .sheet *,
+.is-generating-pdf .main-table *,
+.is-generating-pdf .main-table td,
+.is-generating-pdf .main-table th,
+.is-generating-pdf textarea,
+.is-generating-pdf input {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.is-generating-pdf .print\:hidden {
+  display: none !important;
+}
+
+.is-generating-pdf .hidden.print\:block {
+  display: block !important;
+}
+
+.is-generating-pdf .hidden.print\:flex {
+  display: flex !important;
+}
+
+.is-generating-pdf .hidden.print\:grid {
+  display: grid !important;
+}
+
+.is-generating-pdf .logo-container {
+  height: 60px !important;
+  width: 60px !important;
+}
+
+.is-generating-pdf .company-tagline-1,
+.is-generating-pdf .company-tagline-2 {
+  white-space: nowrap !important;
+}
+
+.is-generating-pdf .main-table {
+  border: 1px solid #475569 !important;
+}
+
+.is-generating-pdf .main-table th {
+  background-color: transparent !important;
+  color: #000000 !important;
+  font-size: 8.5pt !important;
+  font-weight: 700 !important;
+  padding: 3.5px 4px !important;
+  border: 1px solid #475569 !important;
+}
+
+.is-generating-pdf .main-table td {
+  border: 1px solid #475569 !important;
+}
+
+.is-generating-pdf .main-table td,
+.is-generating-pdf .main-table td *,
+.is-generating-pdf .main-table td div {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  white-space: pre-wrap !important;
+}
+
+.is-generating-pdf .meta-top-spacer {
+  display: block !important;
+  width: 100% !important;
+  height: 10px !important;
+  min-height: 10px !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  clear: both !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.is-generating-pdf .meta-bottom-spacer {
+  display: block !important;
+  width: 100% !important;
+  height: 10px !important;
+  min-height: 10px !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  clear: both !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.is-generating-pdf .items-table-wrapper {
+  padding-top: 0 !important;
+  width: 100% !important;
+}
+
+.is-generating-pdf .meta-info-container {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border: 1px solid #475569 !important;
+  border-radius: 4px !important;
+  background-color: #ffffff !important;
+  padding: 12px 16px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  box-sizing: border-box !important;
+  clear: both !important;
+}
+
+.is-generating-pdf .meta-grid-inner {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100% !important;
+}
+
+.is-generating-pdf .meta-left-col {
+  border-right: none !important;
+  padding-right: 16px !important;
+}
+
+.is-generating-pdf .meta-right-col {
+  padding-left: 16px !important;
+}
+
+.is-generating-pdf .meta-info-container * {
+  color: #000000 !important;
+}
+
+.is-generating-pdf .meta-info-row.print\:hidden,
+.is-generating-pdf .meta-info-row.meta-row-empty,
+.is-generating-pdf .meta-col-empty,
+.is-generating-pdf .meta-box-empty {
+  display: none !important;
+}
+
+.is-generating-pdf .meta-info-row:not(.meta-row-empty):not(.print\:hidden) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.is-generating-pdf .meta-info-container [id^="print-"] {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  border-bottom: none !important;
+  min-height: 22px !important;
+}
+
+.is-generating-pdf .meta-info-container label {
+  font-size: 6.5pt !important;
+  font-weight: 800 !important;
+  color: #000000 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.is-generating-pdf .meta-info-container div,
+.is-generating-pdf .meta-info-container span,
+.is-generating-pdf .meta-info-container p {
+  font-size: 6.8pt !important;
+  line-height: 1.25 !important;
+}
+
+.is-generating-pdf .meta-info-container svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+}
+
+.is-generating-pdf .meta-grid {
+  display: grid !important;
+  grid-template-columns: 1.35fr 1fr !important;
+  gap: 20px !important;
+  width: 100% !important;
+  margin-top: 12px !important;
+  margin-bottom: 14px !important;
+}
+
+.is-generating-pdf .meta-grid .meta-box {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  width: 100% !important;
+  padding: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.is-generating-pdf .meta-grid .meta-print-field {
+  display: flex !important;
+  align-items: flex-start !important;
+  height: auto !important;
+  min-height: 24px !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+  gap: 6px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+  font-size: 6.8pt !important;
+  line-height: 1.25 !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.is-generating-pdf .meta-grid .meta-print-field > span:first-child {
+  font-size: 6.5pt !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  line-height: 1.25 !important;
+}
+
+.is-generating-pdf .meta-grid .meta-print-field > span:last-child {
+  min-width: 0 !important;
+  font-size: 6.8pt !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  white-space: pre-wrap !important;
+  flex-grow: 1 !important;
+  line-height: 1.25 !important;
+}
+
+.is-generating-pdf .sig-section {
+  margin-top: 10px !important;
+  padding-top: 8px !important;
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+.is-generating-pdf .sig-box {
+  height: 80px !important;
+  min-height: 80px !important;
+  max-height: 80px !important;
+}
+
+.is-generating-pdf .closing-row {
+  border: 1px solid #475569 !important;
+  border-collapse: collapse !important;
+}
+
+.is-generating-pdf .closing-row td {
+  border-color: #475569 !important;
+}
+
+.is-generating-pdf .sig-line {
+  border-top-width: 1.5px !important;
+  border-top-color: #475569 !important;
+  font-size: 9.5pt !important;
+  padding-top: 4px !important;
+}
+
+.is-generating-pdf .doc-footer-notice {
+  margin-top: 6px !important;
+  padding-top: 2px !important;
+  font-size: 8pt !important;
+  line-height: 1.15 !important;
+}
+
+.is-generating-pdf .hidden.print\:inline,
+.is-generating-pdf .hidden.print\:inline-block {
+  display: inline !important;
+}
+
+.is-generating-pdf textarea.no-print,
+.is-generating-pdf input.no-print {
+  display: none !important;
+}
+
+.is-generating-pdf .sheet {
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 5mm !important;
+  width: 210mm !important;
+  min-height: 297mm !important;
+  background-color: #ffffff !important;
+}
+
+.is-generating-pdf table.print-outer-layout-table > tfoot {
+  display: table-footer-group !important;
+}
+
+.is-generating-pdf .print-repeating-signature-footer {
+  display: none !important;
+}
+
+.is-generating-pdf .print-footer-spacer {
+  display: none !important;
+}
+
+.is-generating-pdf .screen-sig-wrapper {
+  display: block !important;
+}
+
+.is-generating-pdf .quotation-container {
+  background-color: #ffffff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure highlights, colors, bold, italic, underline, and font sizes apply in generated PDF */
+.is-generating-pdf mark,
+.is-generating-pdf span[style*="background"],
+.is-generating-pdf span[style*="background-color"],
+.is-generating-pdf [style*="background-color"],
+.is-generating-pdf [style*="background"] {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  -webkit-box-decoration-break: clone !important;
+  box-decoration-break: clone !important;
+  display: inline !important;
+}
+
+.is-generating-pdf font[color],
+.is-generating-pdf span[style*="color"],
+.is-generating-pdf [style*="color"] {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
+}
+
+.is-generating-pdf b,
+.is-generating-pdf strong,
+.is-generating-pdf span[style*="font-weight: bold"],
+.is-generating-pdf span[style*="font-weight:bold"],
+.is-generating-pdf span[style*="font-weight: 700"],
+.is-generating-pdf span[style*="font-weight:700"],
+.is-generating-pdf [style*="font-weight: bold"],
+.is-generating-pdf [style*="font-weight:bold"],
+.is-generating-pdf [style*="font-weight: 700"],
+.is-generating-pdf [style*="font-weight:700"] {
+  font-weight: 700 !important;
+}
+
+.is-generating-pdf i,
+.is-generating-pdf em,
+.is-generating-pdf span[style*="font-style: italic"],
+.is-generating-pdf span[style*="font-style:italic"],
+.is-generating-pdf [style*="font-style: italic"],
+.is-generating-pdf [style*="font-style:italic"] {
+  font-style: italic !important;
+}
+
+.is-generating-pdf u,
+.is-generating-pdf span[style*="text-decoration: underline"],
+.is-generating-pdf span[style*="text-decoration:underline"],
+.is-generating-pdf [style*="text-decoration: underline"],
+.is-generating-pdf [style*="text-decoration:underline"] {
+  text-decoration: underline !important;
+  -webkit-text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+.is-generating-pdf span[style*="text-decoration-style: double"],
+.is-generating-pdf [style*="text-decoration-style: double"],
+.is-generating-pdf [style*="text-decoration-style:double"] {
+  text-decoration: underline !important;
+  text-decoration-style: double !important;
+  -webkit-text-decoration-style: double !important;
+}

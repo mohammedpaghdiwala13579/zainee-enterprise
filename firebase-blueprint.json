@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "document": {
+      "title": "SavedDocument",
+      "description": "A saved quotation, invoice, or challan document",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "docType": { "type": "string" },
+        "dateVal": { "type": "string" },
+        "messers": { "type": "string" },
+        "address": { "type": "string" },
+        "invoiceNo": { "type": "string" },
+        "challanNo": { "type": "string" },
+        "requisitionNo": { "type": "string" },
+        "poNumber": { "type": "string" },
+        "vatPercent": { "type": "number" },
+        "transportationFee": { "type": "number" },
+        "rows": { "type": "array" },
+        "mergedRegions": { "type": "array" },
+        "cellFormats": { "type": "object" }
+      },
+      "required": ["name", "createdAt", "updatedAt", "docType", "rows"]
+    }
+  },
+  "firestore": {
+    "zainee_documents/{documentId}": {
+      "schema": "document",
+      "description": "Collection of saved quotation, invoice, and challan documents for Zainee Enterprise"
+    },
+    "documents/{documentId}": {
+      "schema": "document",
+      "description": "Collection of saved quotation, invoice, and challan documents"
+    }
+  }
+}

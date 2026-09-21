@@ -1,0 +1,6 @@
+{
+  "name": "Quotation and Challan Builder",
+  "description": "Professional Quotation, Invoice, and Challan Builder with custom business headers for Zainee Enterprise.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
